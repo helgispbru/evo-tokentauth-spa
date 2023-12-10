@@ -50,14 +50,14 @@ export default new Vuex.Store({
     actions: {
         doLogin(context, data) {
             return axios
-                .post('/api/login', data)
+                .post('/api/auth/login', data)
                 .then((response) => {
                     context.commit('auth_success', response.data.token);
                 });
         },
         doLogout(context) {
             return axios
-                .get('/api/logout')
+                .get('/api/auth/logout')
                 .then(() => {
                     context.commit('logout_success')
                 });
@@ -69,7 +69,7 @@ export default new Vuex.Store({
             }
 
             return axios
-                .put('/api/refreshtoken', { refresh_token: context.getters.getRefreshToken })
+                .put('/api/auth/refreshtoken', { refresh_token: context.getters.getRefreshToken })
                 .then((response) => {
                     context.commit('auth_success', response.data.token);
                 })
